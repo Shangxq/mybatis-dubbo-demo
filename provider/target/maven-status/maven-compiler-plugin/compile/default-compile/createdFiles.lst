@@ -1,6 +1,0 @@
-bizfuse\mybatis\demo\config\MybatisConfig.class
-bizfuse\mybatis\demo\domain\Student.class
-bizfuse\mybatis\demo\mapper\StudentMapper.class
-bizfuse\mybatis\demo\Application.class
-bizfuse\mybatis\demo\service\impl\StudentServiceImpl.class
-bizfuse\mybatis\demo\controller\StudentController.class
