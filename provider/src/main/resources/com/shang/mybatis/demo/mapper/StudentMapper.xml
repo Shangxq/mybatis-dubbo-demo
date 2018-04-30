@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shang.mybatis.demo.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.shang.mybatis.demo.domain.Student">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+  </resultMap>
+  <resultMap id="RPCResultMap" type="com.shang.api.dto.StudentDTO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, name, age, grade
+  </sql>
+ 
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="RPCResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="findPage" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student 
+    limit #{skip}, #{pageSize}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from student
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.shang.mybatis.demo.domain.Student">
+    insert into student (name, age, grade)
+    values (#{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{grade,jdbcType=INTEGER})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.shang.mybatis.demo.domain.Student">
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

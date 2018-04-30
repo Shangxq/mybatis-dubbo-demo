@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+    application.name: provider-demo
+    profiles.active: dev
+    dubbo:
+        application.name: provider-demo
+        registry.address: zookeeper://127.0.0.1:2181
+        protocol:
+            name: dubbo
+            port: 20880
+        scan: service
+
+logging:
+  path: logs
+  level:
+    com.leadingsoft.demo: DEBUG
+    org.springframework: WARN
